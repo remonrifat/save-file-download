@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Design by foolishdeveloper.com -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style media="screen">
+        @import url("https://fonts.googleapis.com/css?family=Kanit&display=swap");
+
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #216e5b;
+            font-family: "Kanit", Verdana, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #container {
+            width: 430px;
+            padding: 40px 20px;
+            background: white;
+        }
+
+        h1 {
+            color: #000203;
+            font-size: 30px;
+            width: 100%;
+            margin-top: -15px;
+            margin-bottom: 30px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        #text {
+            display: block;
+            width: 100%;
+            background-color: transparent;
+            color: #4e63a1;
+            border: 2px solid #006bad;
+            border-radius: 10px;
+            resize: none;
+            margin-bottom: 35px;
+            height: 200px;
+            padding: 10px;
+            font-size: 20px;
+        }
+
+        #filename {
+            width: calc(100% - 200px);
+            border: 2px solid #35a3ec;
+            border-radius: 16px;
+            background-color: transparent;
+            color: #609bdf;
+            padding: 0 10px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 20px;
+            margin-right: 20px;
+        }
+
+        #download {
+            background-color: #43d45b;
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            height: 50px;
+            border: none;
+            border-radius: 15px;
+            width: 174px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <h1>Save the text to a file</h1>
+        <textarea placeholder="Type your text here..." id="text"></textarea>
+        <input id="filename" placeholder="Specify a filename..." />
+        <button id="download">Download file</button>
+        <footer>&copy; Copyright 2090 Rimon Sadir Rifat</footer>
+    </div>
+
+
+    <script type="text/javascript">
+        function downloadFile(filename, content) {
+
+            const element = document.createElement('a');
+
+
+            const blob = new Blob([content], { type: 'plain/text' });
+
+
+            const fileUrl = URL.createObjectURL(blob);
+
+
+            element.setAttribute('href', fileUrl); //file location
+            element.setAttribute('download', filename); // file name
+            element.style.display = 'none';
+
+
+            document.body.appendChild(element);
+            element.click();
+
+
+            document.body.removeChild(element);
+        };
+
+        window.onload = () => {
+            document.getElementById('download').
+                addEventListener('click', e => {
+
+
+                    const filename = document.getElementById('filename').value;
+
+
+                    const content = document.getElementById('text').value;
+
+
+                    if (filename && content) {
+                        downloadFile(filename, content);
+                    }
+                });
+        };
+    </script>
+</body>
+
+</html>
